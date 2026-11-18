@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<!--
+    connexion.html : formulaire de connexion (URL "/connexion").
+    Sprint 1 : le formulaire s'affiche mais ne connecte pas encore.
+    La vraie connexion sera gérée par Spring Security au Sprint 2.
+-->
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{base :: base(~{::content}, 'PolymathIA - Connexion', 'connexion')}">
+
+<div th:fragment="content" class="pm-auth">
+
+    <!-- Partie gauche : logo et slogan (cachée sur petit écran) -->
+    <div class="pm-auth-brand d-none d-lg-flex">
+        <img th:src="@{/img/logo-icone.png}" alt="Logo PolymathIA" width="240" height="240">
+        <div class="pm-auth-name">Polymath<span class="pm-text-gradient">IA</span></div>
+        <p>Plusieurs intelligences artificielles,<br>une seule plateforme.</p>
+    </div>
+
+    <!-- Partie droite : le formulaire -->
+    <div class="pm-auth-form">
+        <div class="pm-card">
+            <h1>Connexion</h1>
+            <p class="pm-muted">Ravi de vous revoir ! Connectez-vous pour retrouver vos discussions.</p>
+
+            <!-- Message affiché après un clic sur "Se connecter" (connexion pas encore disponible) -->
+            <div th:if="${param.bientot}" class="alert alert-info small" role="alert">
+                <i class="bi bi-info-circle"></i>
+                La connexion n'est pas encore disponible : elle arrivera au Sprint 2.
+            </div>
+
+            <form th:action="@{/connexion}" method="post">
+                <div class="mb-3">
+                    <label for="email" class="form-label">Adresse e-mail</label>
+                    <input type="email" id="email" name="email" class="form-control"
+                           placeholder="exemple@mail.fr" autocomplete="email" required>
+                </div>
+                <div class="mb-4">
+                    <label for="motDePasse" class="form-label">Mot de passe</label>
+                    <input type="password" id="motDePasse" name="motDePasse" class="form-control"
+                           autocomplete="current-password" required>
+                </div>
+                <button type="submit" class="btn pm-btn-gradient w-100">Se connecter</button>
+            </form>
+
+            <div class="pm-divider"><span>ou</span></div>
+
+            <a th:href="@{/}" class="btn btn-outline-secondary w-100">
+                Continuer sans compte (visiteur)
+            </a>
+
+            <p class="pm-auth-signup">
+                Pas encore de compte ?
+                <!-- La page d'inscription sera créée dans un prochain sprint -->
+                <a href="#">Créer un compte</a>
+            </p>
+        </div>
+    </div>
+
+</div>
+
+</html>

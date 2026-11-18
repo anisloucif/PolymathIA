@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<!--
+    accueil.html : interface principale du chatbot (page d'accueil, URL "/").
+    Sprint 1 : la page s'affiche mais n'est pas encore reliée à l'IA.
+-->
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{base :: base(~{::content}, 'PolymathIA - Accueil', 'accueil')}">
+
+<div th:fragment="content" class="pm-chat">
+
+    <!-- Barre du haut : titre de la discussion + choix du modèle -->
+    <div class="pm-topbar">
+        <div class="d-flex align-items-center gap-2">
+            <!-- Bouton menu (petits écrans uniquement) -->
+            <button type="button" class="btn btn-light d-lg-none"
+                    data-bs-toggle="offcanvas" data-bs-target="#pmSidebar"
+                    aria-controls="pmSidebar" aria-label="Ouvrir le menu">
+                <i class="bi bi-list"></i>
+            </button>
+            <h1 class="pm-topbar-title">Nouvelle discussion</h1>
+        </div>
+
+        <!-- Choix du modèle d'IA, au moment de créer la discussion.
+             Sprint 1 : liste écrite en dur. Elle sera remplie plus tard avec
+             les modèles enregistrés en base de données (th:each). -->
+        <div class="pm-model-picker">
+            <label for="modele" class="pm-model-label">Modèle :</label>
+            <select id="modele" class="form-select form-select-sm">
+                <optgroup label="Gemini">
+                    <option>gemini-3.8-flash</option>
+                    <option>gemini-3.5-flash-lite</option>
+                </optgroup>
+                <optgroup label="Mistral">
+                    <option>mistral-small-latest</option>
+                    <option>mistral-medium-latest</option>
+                </optgroup>
+            </select>
+        </div>
+    </div>
+
+    <!-- Zone des messages : message d'accueil tant que la discussion est vide -->
+    <div class="pm-messages">
+        <div class="pm-welcome">
+            <img th:src="@{/img/logo-icone.png}" alt="Logo PolymathIA" width="96" height="96">
+            <h2>Bonjour, que voulez-vous savoir ?</h2>
+            <p>Choisissez un modèle d'IA en haut à droite, puis posez votre question.</p>
+
+            <!-- Suggestions : un clic copie le texte dans la zone de saisie (voir script.js) -->
+            <div class="pm-suggestions">
+                <button type="button" class="pm-suggestion">Explique-moi les jointures SQL</button>
+                <button type="button" class="pm-suggestion">Corrige ma fonction Kotlin</button>
+                <button type="button" class="pm-suggestion">Résume un chapitre de CEJM</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Zone de saisie du message (pas encore reliée à l'IA) -->
+    <form class="pm-composer" th:action="@{/}" method="get">
+        <div class="pm-composer-box">
+            <textarea rows="1" placeholder="Écrivez votre message…"
+                      aria-label="Votre message"></textarea>
+            <button type="submit" class="btn pm-btn-gradient">
+                Envoyer <i class="bi bi-send"></i>
+            </button>
+        </div>
+    </form>
+
+</div>
+
+</html>

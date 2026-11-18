@@ -1,0 +1,411 @@
+/* ==========================================================================
+   style.css : charte graphique de PolymathIA (voir cahier des charges, partie VI)
+   - Polices : Poppins (titres, boutons) et Inter (textes)
+   - Couleur principale : dégradé #3DA9EB -> #7C5EEA
+   - Couleur secondaire : bleu nuit #091C5F
+   - Fond de page : gris très clair #F5F7FA
+   ========================================================================== */
+
+/* ---------- 1. Polices (fichiers dans static/vendor/fonts) ---------- */
+@font-face { font-family: "Inter"; src: url("../vendor/fonts/inter-latin-400-normal.woff2") format("woff2"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "Inter"; src: url("../vendor/fonts/inter-latin-500-normal.woff2") format("woff2"); font-weight: 500; font-display: swap; }
+@font-face { font-family: "Inter"; src: url("../vendor/fonts/inter-latin-600-normal.woff2") format("woff2"); font-weight: 600; font-display: swap; }
+@font-face { font-family: "Poppins"; src: url("../vendor/fonts/poppins-latin-500-normal.woff2") format("woff2"); font-weight: 500; font-display: swap; }
+@font-face { font-family: "Poppins"; src: url("../vendor/fonts/poppins-latin-600-normal.woff2") format("woff2"); font-weight: 600; font-display: swap; }
+@font-face { font-family: "Poppins"; src: url("../vendor/fonts/poppins-latin-700-normal.woff2") format("woff2"); font-weight: 700; font-display: swap; }
+
+/* ---------- 2. Couleurs de la charte (variables réutilisées partout) ---------- */
+:root {
+    --pm-bleu: #3DA9EB;
+    --pm-violet: #7C5EEA;
+    --pm-degrade: linear-gradient(135deg, #3DA9EB, #7C5EEA);
+    --pm-nuit: #091C5F;
+    --pm-nuit-clair: #16307C;
+    --pm-fond: #F5F7FA;
+    --pm-bordure: #E2E8F0;
+    --pm-texte: #1E293B;
+    --pm-texte-doux: #64748B;
+}
+
+/* ---------- 3. Base ---------- */
+body {
+    font-family: "Inter", sans-serif;
+    color: var(--pm-texte);
+    background: #FFFFFF;
+}
+
+h1, h2, h3, .btn {
+    font-family: "Poppins", sans-serif;
+}
+
+code, pre {
+    font-family: "DejaVu Sans Mono", Consolas, monospace; /* police à chasse fixe pour le code */
+}
+
+.pm-text-gradient {
+    background: var(--pm-degrade);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.pm-muted {
+    color: var(--pm-texte-doux);
+}
+
+/* Bouton principal en dégradé (boutons d'action) */
+.pm-btn-gradient {
+    background: var(--pm-degrade);
+    color: #FFFFFF;
+    border: none;
+    border-radius: 10px;
+    font-weight: 600;
+    padding: 10px 18px;
+}
+.pm-btn-gradient:hover,
+.pm-btn-gradient:focus {
+    color: #FFFFFF;
+    filter: brightness(1.08);
+}
+
+/* ---------- 4. Mise en page générale (base.html) ---------- */
+.pm-layout {
+    display: flex;
+    min-height: 100vh;
+}
+
+.pm-page {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.pm-main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.pm-content {
+    padding: 32px;
+}
+
+/* ---------- 5. Barre latérale (fragments/header.html) ---------- */
+.pm-sidebar-wrapper {
+    --bs-offcanvas-width: 280px;
+    --bs-offcanvas-bg: var(--pm-nuit);
+}
+
+.pm-sidebar {
+    width: 280px;
+    height: 100vh;
+    position: sticky;
+    top: 0;
+    background: var(--pm-nuit);
+    color: #CBD5E1;
+    padding: 22px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    overflow-y: auto;
+}
+
+.pm-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: "Poppins", sans-serif;
+    font-weight: 700;
+    font-size: 22px;
+    color: #FFFFFF;
+    text-decoration: none;
+}
+.pm-brand:hover {
+    color: #FFFFFF;
+}
+
+.pm-section-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    color: #8193B8;
+    margin: 4px 12px 0;
+}
+
+.pm-history-empty {
+    font-size: 13px;
+    color: #8193B8;
+    margin: 0 12px;
+}
+
+.pm-nav-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    border-radius: 8px;
+    color: #CBD5E1;
+    text-decoration: none;
+    font-size: 14px;
+}
+.pm-nav-link:hover,
+.pm-nav-link.active {
+    background: var(--pm-nuit-clair);
+    color: #FFFFFF;
+}
+
+.pm-user {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 16px 12px 0;
+    border-top: 1px solid #23397F;
+}
+
+.pm-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--pm-degrade);
+    color: #FFFFFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.pm-user-name {
+    color: #FFFFFF;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.pm-user-role {
+    font-size: 12px;
+}
+
+/* Petits écrans : la barre latérale devient un menu qui s'ouvre (offcanvas) */
+@media (max-width: 991.98px) {
+    .pm-sidebar {
+        width: 100%;
+        height: 100%;
+        position: static;
+    }
+}
+
+/* ---------- 6. Interface du chatbot (utilisateur/accueil.html) ---------- */
+.pm-chat {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.pm-topbar {
+    min-height: 68px;
+    border-bottom: 1px solid var(--pm-bordure);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    padding: 10px 32px;
+}
+
+.pm-topbar-title {
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0;
+}
+
+.pm-model-picker {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.pm-model-label {
+    color: var(--pm-texte-doux);
+    font-size: 13px;
+    white-space: nowrap;
+}
+
+.pm-messages {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 30px 16px;
+}
+
+.pm-welcome {
+    max-width: 640px;
+    margin: 0 auto;
+    text-align: center;
+}
+.pm-welcome h2 {
+    font-weight: 600;
+    font-size: 26px;
+    margin-top: 16px;
+}
+.pm-welcome p {
+    color: var(--pm-texte-doux);
+}
+
+.pm-suggestions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 22px;
+}
+
+.pm-suggestion {
+    border: 1px solid var(--pm-bordure);
+    background: var(--pm-fond);
+    border-radius: 999px;
+    padding: 8px 16px;
+    font-size: 14px;
+    color: var(--pm-texte);
+}
+.pm-suggestion:hover {
+    border-color: var(--pm-violet);
+    color: var(--pm-violet);
+}
+
+/* Bulles de message (prêtes pour l'affichage des conversations) */
+.pm-bulle-utilisateur {
+    align-self: flex-end;
+    max-width: 70%;
+    background: var(--pm-degrade);
+    color: #FFFFFF;
+    padding: 14px 18px;
+    border-radius: 18px 18px 4px 18px;
+}
+
+.pm-bulle-assistant {
+    align-self: flex-start;
+    max-width: 80%;
+    background: var(--pm-fond);
+    border: 1px solid var(--pm-bordure);
+    padding: 16px 20px;
+    border-radius: 4px 18px 18px 18px;
+}
+.pm-bulle-assistant pre {
+    background: var(--pm-nuit);
+    color: #E2E8F0;
+    border-radius: 10px;
+    padding: 12px 16px;
+}
+
+/* Zone de saisie */
+.pm-composer {
+    padding: 0 16px 20px;
+}
+
+.pm-composer-box {
+    max-width: 820px;
+    margin: 0 auto;
+    display: flex;
+    align-items: flex-end;
+    gap: 12px;
+    border: 1px solid #CBD5E1;
+    border-radius: 16px;
+    padding: 10px 10px 10px 18px;
+    box-shadow: 0 4px 16px rgba(15, 23, 42, .06);
+}
+
+.pm-composer-box textarea {
+    flex: 1;
+    border: none;
+    outline: none;
+    resize: none;
+    padding: 8px 0;
+    max-height: 200px;
+}
+
+/* ---------- 7. Page de connexion (auth/connexion.html) ---------- */
+.pm-auth {
+    flex: 1;
+    display: flex;
+}
+
+.pm-auth-brand {
+    width: 45%;
+    background: var(--pm-nuit);
+    color: #CBD5E1;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 18px;
+    padding: 60px;
+}
+.pm-auth-brand p {
+    font-size: 17px;
+}
+
+.pm-auth-name {
+    font-family: "Poppins", sans-serif;
+    font-weight: 700;
+    font-size: 44px;
+    color: #FFFFFF;
+}
+
+.pm-auth-form {
+    flex: 1;
+    background: var(--pm-fond);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 16px;
+}
+
+.pm-card {
+    width: 100%;
+    max-width: 440px;
+    background: #FFFFFF;
+    border: 1px solid var(--pm-bordure);
+    border-radius: 14px;
+    padding: 40px;
+    box-shadow: 0 10px 30px rgba(15, 23, 42, .08);
+}
+.pm-card h1 {
+    font-size: 26px;
+    font-weight: 600;
+}
+
+.pm-divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 22px 0;
+    color: var(--pm-texte-doux);
+    font-size: 13px;
+}
+.pm-divider::before,
+.pm-divider::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--pm-bordure);
+}
+
+.pm-auth-signup {
+    text-align: center;
+    margin: 24px 0 0;
+    font-size: 14px;
+    color: var(--pm-texte-doux);
+}
+.pm-auth-signup a {
+    color: var(--pm-violet);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+/* ---------- 8. Pied de page (fragments/footer.html) ---------- */
+.pm-footer {
+    text-align: center;
+    font-size: 12px;
+    color: var(--pm-texte-doux);
+    padding: 10px 16px 14px;
+}

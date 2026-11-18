@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<!--
+    base.html : structure HTML commune à TOUTES les pages de PolymathIA.
+    Chaque page appelle ce fragment en lui donnant 3 paramètres :
+      - content    : le contenu propre à la page
+      - titre      : le texte affiché dans l'onglet du navigateur
+      - activePage : le nom de la page (sert à surligner le bon lien du menu)
+-->
+<html xmlns:th="http://www.thymeleaf.org" lang="fr"
+      th:fragment="base(content, titre, activePage)">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title th:text="${titre} ?: 'PolymathIA'">PolymathIA</title>
+
+    <!-- Favicon (icône de l'onglet) -->
+    <link rel="icon" type="image/png" th:href="@{/img/favicon.png}">
+
+    <!-- Bootstrap + Bootstrap Icons (fichiers téléchargés dans static/vendor) -->
+    <link rel="stylesheet" th:href="@{/vendor/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/vendor/css/bootstrap-icons.min.css}">
+
+    <!-- Feuille de style de PolymathIA (charte graphique) -->
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body>
+<div class="pm-layout">
+
+    <!-- Barre latérale (header), affichée sur toutes les pages sauf la connexion -->
+    <th:block th:if="${activePage != 'connexion'}">
+        <header th:replace="~{fragments/header :: header(${activePage})}"></header>
+    </th:block>
+
+    <div class="pm-page">
+        <!-- Contenu principal : remplacé par le contenu de chaque page -->
+        <main class="pm-main">
+            <div th:replace="${content}"></div>
+        </main>
+
+        <!-- Pied de page -->
+        <footer th:replace="~{fragments/footer :: footer}"></footer>
+    </div>
+
+</div>
+
+<!-- JavaScript : Bootstrap puis le script de PolymathIA -->
+<script th:src="@{/vendor/js/bootstrap.bundle.min.js}"></script>
+<script th:src="@{/js/script.js}"></script>
+</body>
+</html>

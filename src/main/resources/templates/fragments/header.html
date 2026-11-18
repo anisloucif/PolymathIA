@@ -1,0 +1,60 @@
+<div xmlns:th="http://www.thymeleaf.org">
+    <!--
+        header.html : barre latérale bleu nuit (voir maquette « Interface principale du chatbot »).
+        Sur grand écran, elle est toujours visible à gauche.
+        Sur petit écran, elle se cache et s'ouvre avec le bouton menu (composant « offcanvas » de Bootstrap).
+    -->
+    <header th:fragment="header(activePage)"
+            class="offcanvas-lg offcanvas-start pm-sidebar-wrapper"
+            tabindex="-1" id="pmSidebar" aria-label="Menu PolymathIA">
+
+        <div class="pm-sidebar">
+
+            <!-- Logo + nom du projet -->
+            <div class="d-flex align-items-center justify-content-between">
+                <a th:href="@{/}" class="pm-brand">
+                    <img th:src="@{/img/logo-icone.png}" alt="" width="40" height="40">
+                    <span>Polymath<span class="pm-text-gradient">IA</span></span>
+                </a>
+                <!-- Bouton pour fermer le menu (petits écrans uniquement) -->
+                <button type="button" class="btn-close btn-close-white d-lg-none"
+                        data-bs-dismiss="offcanvas" data-bs-target="#pmSidebar"
+                        aria-label="Fermer le menu"></button>
+            </div>
+
+            <!-- Nouvelle discussion -->
+            <a th:href="@{/}" class="btn pm-btn-gradient w-100">
+                <i class="bi bi-plus-lg"></i>
+                Nouvelle discussion
+            </a>
+
+            <!-- Historique des discussions (rempli depuis la base dans un prochain sprint) -->
+            <div class="pm-section-label">Mes discussions</div>
+            <nav class="pm-history">
+                <p class="pm-history-empty">
+                    Connectez-vous pour retrouver vos discussions ici.
+                </p>
+            </nav>
+
+            <!-- Espace vide qui pousse la suite tout en bas -->
+            <div class="flex-grow-1"></div>
+
+            <!-- Lien vers la connexion -->
+            <a th:href="@{/connexion}" class="pm-nav-link"
+               th:classappend="${activePage} == 'connexion' ? ' active' : ''">
+                <i class="bi bi-box-arrow-in-right"></i>
+                Se connecter
+            </a>
+
+            <!-- Visiteur non connecté (l'utilisateur connecté arrivera au Sprint 2) -->
+            <div class="pm-user">
+                <div class="pm-avatar"><i class="bi bi-person"></i></div>
+                <div>
+                    <div class="pm-user-name">Visiteur</div>
+                    <div class="pm-user-role">Non connecté</div>
+                </div>
+            </div>
+
+        </div>
+    </header>
+</div>
