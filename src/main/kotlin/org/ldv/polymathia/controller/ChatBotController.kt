@@ -7,12 +7,7 @@ import org.springframework.web.bind.annotation.PostMapping
 @Controller
 class ChatBotController {
 
-    // Page d'accueil : interface du chatbot -> http://localhost:8080/
-    @GetMapping("/")
-    fun accueil(): String {
-        // Affiche le template src/main/resources/templates/utilisateur/accueil.html
-        return "utilisateur/accueil"
-    }
+    // La page d'accueil (/) est maintenant gérée par ChatController (Sprint 1, Séance 2).
 
     // Formulaire de connexion -> http://localhost:8080/connexion
     @GetMapping("/connexion")
