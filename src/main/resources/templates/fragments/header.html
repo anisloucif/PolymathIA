@@ -28,12 +28,17 @@
                 Nouvelle discussion
             </a>
 
-            <!-- Historique des discussions (rempli depuis la base dans un prochain sprint) -->
+            <!-- Historique des discussions (Sprint 1, Séance 2) : un lien par conversation -->
             <div class="pm-section-label">Mes discussions</div>
             <nav class="pm-history">
-                <p class="pm-history-empty">
-                    Connectez-vous pour retrouver vos discussions ici.
-                </p>
+                <div class="list-group">
+                    <a th:each="c : ${conversations}"
+                       th:href="@{/conversations/{id}(id=${c.id})}"
+                       th:text="${c.titre}"
+                       class="list-group-item list-group-item-action"
+                       th:classappend="${conversation != null and conversation.id == c.id} ? 'active' : ''">
+                    </a>
+                </div>
             </nav>
 
             <!-- Espace vide qui pousse la suite tout en bas -->
